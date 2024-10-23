@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/navbar/Navbar";
 import { NextAuthProvider } from "@/components/universal/Providers";
+import SidebarProviderContainer from "@/components/navbar/SidebarProviderContainer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,13 +14,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="h-screen overflow-hidden">
         <NextAuthProvider>
-        <div>
-          <Navbar />
-          <main>{children}</main>
-        </div>
+          <div className="flex h-screen">
+            <div className="">
+              <SidebarProviderContainer />
+            </div>
+            <main className="flex-1 h-[calc(100vh-64px)]">{children}</main>
+          </div>
         </NextAuthProvider>
       </body>
     </html>
